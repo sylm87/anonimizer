@@ -1,0 +1,6 @@
+# Formato: <proveedor>:<tecnologia>:<usuario>:<password>
+# tecnologia ∈ {wireguard, openvpn}
+
+# Ejemplos:
+windscribe:wireguard:miusuario:mipassword
+mullvad:openvpn::    # OpenVPN sin user/pass (usa certificados del .ovpn)
