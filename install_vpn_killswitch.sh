@@ -326,7 +326,15 @@ health_loop() {
       if bringup_any_vpn_random; then apply_killswitch_post; else log "[ERROR] No se pudo restablecer VPN. Killswitch activo."; fi
       continue
     fi
-    if ! ping -I "$VPN_IFACE" -c1 -W 3 "$HEALTHCHECK_IP" &>/dev/null; then
+    
+    error=0
+    for i in {1..3}; do
+      if ! ping -I "$VPN_IFACE" -c1 -W 5 "$HEALTHCHECK_IP" &>/dev/null; then
+        ((error+=1))
+      fi
+    done
+    
+    if (( error == 3 )); then
       log "[ALERTA] Healthcheck fallido. Reintentando reconexión..."
       stop_openvpn || true; stop_wireguard || true
       apply_killswitch_pre
