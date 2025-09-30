@@ -27,7 +27,7 @@ install_deps() {
     apt)
       apt-get update -y
       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        iptables iproute2 openvpn wireguard-tools grep sed gawk curl iputils-ping
+        iptables iproute2 openvpn wireguard-tools grep sed gawk curl iputils-ping resolvconf rsync
       ;;
     dnf)    dnf install -y iptables iproute openvpn wireguard-tools grep sed gawk curl iputils ;;
     yum)    yum install -y iptables iproute openvpn wireguard-tools grep sed gawk curl iputils ;;
